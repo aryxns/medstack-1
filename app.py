@@ -22,7 +22,7 @@ def main():
         time.sleep(2)
         status_text.success("All Set!")
         st.write("---------------------------------")
-        st.header("OneMed is an open-source medical diagnosis tool which accurately analyzes complex medical conditions. All of this, in a few seconds.= :)")
+        st.header("OneMed is an open-source medical diagnosis tool which accurately analyzes complex medical conditions. All of this, in a few seconds !")
         st.write("--------------------------------------------------")
         st.header("Steps:")
         st.subheader("1. Go to a section from the sidebar")
