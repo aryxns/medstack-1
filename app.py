@@ -24,7 +24,7 @@ def main():
         st.write("---------------------------------")
         st.subheader("**Why?**")
         st.write("Medical science has made gigantic progress over the past 150 years. Yet, most of this is inaccesible to a large piece of world population. Machine learning has reached a point where it can help solve the **accessibility** issue. OneMed uses tensorflow/keras and openvino engine for accurate medical diagnosis right in the browser.")
-        st.sidebar.write("OneMed is an open-source medical diagnosis tool which accurately analyzes complex medical conditions. All of this, in a few seconds !")
+        st.sidebar.write("OneMed is an open-source medical diagnosis tool which accurately analyzes complex medical conditions. All of this, in a few seconds!")
         st.subheader("Watch the demo")
         st.video('https://www.youtube.com/watch?v=FptQoOpoN1w')
         st.write("--------------------------------------------------")
