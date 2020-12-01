@@ -22,7 +22,12 @@ def main():
         time.sleep(2)
         status_text.success("All Set!")
         st.write("---------------------------------")
-        st.subheader("OneMed contains 3 main sections: Explore the sections in the menu on the sidebar. Once you select a section, you'll be asked to upload an image. Once uploaded, buttons will pop-up with function calls to the models. The results will be shown on the same page.")
+        st.header("OneMed is an open-source medical diagnosis tool which accurately analyzes complex medical conditions. All of this, in a few seconds.= :)")
+        st.write("--------------------------------------------------")
+        st.header("Steps:")
+        st.subheader("1. Go to a section from the sidebar")
+        st.subheader("2. Upload an image")
+        st.subheader("3. Let the magic happen")
     elif menu == "EyeMed":
         st.sidebar.write("OneMed Eye analyzes cataract, diabetic retinopathy and redness levels. Upload an image to get started.")
         st.write("---------------------------")
