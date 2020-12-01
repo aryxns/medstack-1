@@ -7,7 +7,7 @@ from redness import redi
 import time
 
 def main():
-    st.title("MedStack: Openvino based medical tools")
+    st.title("OneMed: One click medical diagnosis")
     st.write("------------------------------------------")
     st.sidebar.title("Command Bar")
     choices = ["Home","EyeMed", "COVID Med", "Skin Med"]
@@ -22,9 +22,9 @@ def main():
         time.sleep(2)
         status_text.success("All Set!")
         st.write("---------------------------------")
-        st.write("MedStack contains 3 main sections: Explore the sections in the menu on the sidebar. Once you select a section, you'll be asked to upload an image. Once uploaded, buttons will pop-up with function calls to the models. The results will be shown on the same page.")
+        st.subheader("OneMed contains 3 main sections: Explore the sections in the menu on the sidebar. Once you select a section, you'll be asked to upload an image. Once uploaded, buttons will pop-up with function calls to the models. The results will be shown on the same page.")
     elif menu == "EyeMed":
-        st.sidebar.write("EyeMed analyzes cataract, diabetic retinopathy and redness levels. Upload an image to get started.")
+        st.sidebar.write("OneMed Eye analyzes cataract, diabetic retinopathy and redness levels. Upload an image to get started.")
         st.write("---------------------------")
         image_input = st.sidebar.file_uploader("Choose an eye image: ", type="jpg")
         if image_input:
@@ -73,9 +73,9 @@ def main():
                 class1 = prediction[0,0]
                 class2 = prediction[0,1]
                 if class1 > class2:
-                    st.markdown("EyeMed thinks this is a **Cataract** by " + str(class1 * 100) + "%" )
+                    st.markdown("OneMed thinks this is a **Cataract** by " + str(class1 * 100) + "%" )
                 elif class2 > class1:
-                    st.markdown("EyeMed thinks this is **Uveitis** by " + str(class2 * 100) + "%")
+                    st.markdown("OneMed thinks this is **Uveitis** by " + str(class2 * 100) + "%")
                 else:
                     st.write("We encountered an ERROR. This should be temporary, please try again with a better quality image. Cheers!")
 
@@ -101,7 +101,7 @@ def main():
                     st.write("-------------------------------")
 
     elif menu == "COVID Med":
-        st.sidebar.write("COVID Med uses CT Scans to detect whether the patient is likely to have COVID or not. Upload an image to get started.")
+        st.sidebar.write("OneMed COVID uses CT Scans to detect whether the patient is likely to have COVID or not. Upload an image to get started.")
         st.write("---------------------------")
         st.set_option('deprecation.showfileUploaderEncoding', False)
         image_input = st.sidebar.file_uploader("Choose a file: ", type='png')
@@ -146,7 +146,7 @@ def main():
                     st.write("Error! Please upload a better quality image for accuracy.")
                     
     elif menu == "Skin Med":
-        st.sidebar.write("Skin Med detects whether the patient has benign or malignant type of cancer. Further classifications are still under testing. Upload an image to get started.")
+        st.sidebar.write("OneMed Skin detects whether the patient has benign or malignant type of cancer. Further classifications are still under testing. Upload an image to get started.")
         st.write("---------------------------")
         st.set_option('deprecation.showfileUploaderEncoding', False)
         image_input = st.sidebar.file_uploader("Choose a file: ", type='jpg')
