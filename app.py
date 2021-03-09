@@ -7,7 +7,7 @@ from redness import redi
 import time
 
 def main():
-    st.title("OneMed: One click medical diagnosis")
+    st.title("OneMed: Tensorflow Keras based medical tools")
     st.write("------------------------------------------")
     st.sidebar.title("Command Bar")
     choices = ["Home","EyeMed", "COVID Med", "Skin Med"]
@@ -22,24 +22,21 @@ def main():
         time.sleep(2)
         status_text.success("All Set!")
         st.write("---------------------------------")
-        st.subheader("**Why?**")
-        st.write("Medical science has made gigantic progress over the past 150 years. Yet, most of this is inaccesible to a large piece of world population. Machine learning has reached a point where it can help solve the **accessibility** issue. OneMed uses tensorflow/keras and openvino engine for accurate medical diagnosis right in the browser.")
-        st.sidebar.write("OneMed is an open-source medical diagnosis tool which accurately analyzes complex medical conditions. All of this, in a few seconds!")
-        st.subheader("Watch the demo")
-        st.video('https://www.youtube.com/watch?v=FptQoOpoN1w')
-        st.write("--------------------------------------------------")
-        st.header("Steps:")
-        st.subheader("1. Go to a section from the sidebar")
-        st.subheader("2. Upload an image")
-        st.subheader("3. Let the magic happen")
+        st.write("OneMed contains 3 main sections: Explore the sections in the menu on the sidebar. Once you select a section, you'll be asked to upload an image. Once uploaded, buttons will pop-up with function calls to the models. The results will be shown on the same page.")
     elif menu == "EyeMed":
-        st.sidebar.write("OneMed Eye analyzes cataract, diabetic retinopathy and redness levels. Upload an image to get started.")
+        st.sidebar.write("EyeMed analyzes cataract, diabetic retinopathy and redness levels. Upload an image to get started.")
         st.write("---------------------------")
         image_input = st.sidebar.file_uploader("Choose an eye image: ", type="jpg")
         if image_input:
             st.sidebar.image(image_input, width=300, height=300)
 
             detect = st.sidebar.button("Detect Cataract")
+            dr = st.sidebar.button("Analyze Diabetic Retinopathy")
+            r = st.sidebar.button("Analyze Redness Levels")
+            size = st.slider("Adjust Image Size: ", 300, 1000)
+            st.image(image_input, width=size, height=size)
+            st.write("------------------------------------------------------")
+            
 
     # Disable scientific notation for clarity
             np.set_printoptions(suppress=True)
@@ -71,20 +68,16 @@ def main():
     # Load the image into the array
             data[0] = normalized_image_array
 
-            size = st.slider("Adjust Image Size: ", 300, 1000)
-            st.image(image_input, width=size, height=size)
-            st.write("------------------------------------------------------")
-            dr = st.sidebar.button("Analyze Diabetic Retinopathy")
-            r = st.sidebar.button("Analyze Redness Levels")
+            
 
             if detect:
                 prediction = model.predict(data)
                 class1 = prediction[0,0]
                 class2 = prediction[0,1]
                 if class1 > class2:
-                    st.markdown("OneMed thinks this is a **Cataract** by " + str(class1 * 100) + "%" )
+                    st.markdown("EyeMed thinks this is a **Cataract** by " + str(class1 * 100) + "%" )
                 elif class2 > class1:
-                    st.markdown("OneMed thinks this is **Uveitis** by " + str(class2 * 100) + "%")
+                    st.markdown("EyeMed thinks this is **Uveitis** by " + str(class2 * 100) + "%")
                 else:
                     st.write("We encountered an ERROR. This should be temporary, please try again with a better quality image. Cheers!")
 
@@ -110,7 +103,7 @@ def main():
                     st.write("-------------------------------")
 
     elif menu == "COVID Med":
-        st.sidebar.write("OneMed COVID uses CT Scans to detect whether the patient is likely to have COVID or not. Upload an image to get started.")
+        st.sidebar.write("COVID Med uses CT Scans to detect whether the patient is likely to have COVID or not. Upload an image to get started.")
         st.write("---------------------------")
         st.set_option('deprecation.showfileUploaderEncoding', False)
         image_input = st.sidebar.file_uploader("Choose a file: ", type='png')
@@ -141,21 +134,21 @@ def main():
             # Normalize the image
                 normalized_image_array = (image_array.astype(np.float32) / 127.0) - 1
             # Load the image into the array
-                #data[0] = normalized_image_array
+                data[0] = normalized_image_array
             # run the inference
                 prediction = model.predict(data)
                 print(prediction)
                 class1 = prediction[0,0]
                 class2 = prediction[0,1]
-                if class1 - class2 > 0.5:
+                if class1 - class2 > 0.3:
                     st.markdown("**Possibility of COVID.** Confidence: " + str(class1 * 100) + "%")
-                elif class2 - class1 > 0.5:
+                elif class2 - class1 > 0.3:
                     st.markdown("**Unlikely to have COVID**")
                 else:
                     st.write("Error! Please upload a better quality image for accuracy.")
                     
     elif menu == "Skin Med":
-        st.sidebar.write("OneMed Skin detects whether the patient has benign or malignant type of cancer. Further classifications are still under testing. Upload an image to get started.")
+        st.sidebar.write("Skin Med detects whether the patient has benign or malignant type of cancer. Further classifications are still under testing. Upload an image to get started.")
         st.write("---------------------------")
         st.set_option('deprecation.showfileUploaderEncoding', False)
         image_input = st.sidebar.file_uploader("Choose a file: ", type='jpg')
