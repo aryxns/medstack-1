@@ -109,8 +109,7 @@ def main():
         image_input = st.sidebar.file_uploader("Choose a file: ", type='png')
         if image_input:
             analyze = st.sidebar.button("Analyze")
-            size = st.slider("Adjust image size: ", 300, 1000)
-            st.image(image_input, width=size, height=size)
+            st.image(image_input, width=300, height=300)
             st.write("-----------------------------------------")
             # Disable scientific notation for clarity 
             np.set_printoptions(suppress=True)
@@ -154,8 +153,7 @@ def main():
         image_input = st.sidebar.file_uploader("Choose a file: ", type='jpg')
         if image_input:
             analyze = st.sidebar.button("Analyze")
-            size = st.slider("Adjust image size: ", 300, 1000)
-            st.image(image_input, width=size, height=size)
+            st.image(image_input, width=300, height=300)
             st.write("-----------------------------------------")
             # Disable scientific notation for clarity 
             np.set_printoptions(suppress=True)
